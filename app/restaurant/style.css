@@ -92,3 +92,78 @@
 .footer-wrapper a:hover {
   color: #ffffff;
 }
+.dashboard-button {
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #e85d04;
+  transform: translateY(-2px);
+}
+
+.dashboard-button:active {
+  transform: scale(0.95);
+}
+
+.food-table-container {
+  width: 100%;
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.food-table th,
+.food-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.food-table th {
+  background: #f5f5f5;
+  font-size: 18px;
+}
+
+.food-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.food-table tr:hover {
+  background: #f1f1f1;
+}
+
+.food-image {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  margin: 0 5px;
+}
+
+.edit-btn {
+  background: green;
+}
+
+.delete-btn {
+  background: red;
+}
