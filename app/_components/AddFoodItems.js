@@ -1,14 +1,15 @@
 "use client";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const AddFoodItems = () => {
+const AddFoodItems = ({setAddItem,addItem}) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [path, setPath] = useState("");
   const [description, setDescription] = useState("");
 
   const [Error, setError] = useState(false);
-
+// const router=useRouter()
   const addfoodItem = async () => {
     const restaurantUser = JSON.parse(localStorage.getItem("restaurantUser"));
 
@@ -37,11 +38,13 @@ const AddFoodItems = () => {
       if (result?.result) {
         alert("Food item added successfully!");
 
+        // router.push("/restaurant/dashboard")
         // Clear form
         setName("");
         setPrice("");
         setPath("");
         setDescription("");
+        setAddItem(!addItem)
       } else {
         alert(result?.message || "Failed to add food item.");
       }

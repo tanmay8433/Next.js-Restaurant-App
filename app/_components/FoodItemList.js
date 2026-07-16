@@ -1,10 +1,13 @@
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { useEffect, useReducer, useState } from 'react';
 
 
 const FoodItemList = () => {
    const [foodItems,setFoodItems]=useState([]);
+   const router=useRouter()
    const getFoodItems = async () => {
       try {
         const restaurantUser = JSON.parse(
@@ -28,6 +31,29 @@ const FoodItemList = () => {
         console.error("Failed to fetch food items:", error);
       }
     };
+    const handleDeleteitem = async (id) => {
+  try {
+    if (!id) return;
+
+    const response = await fetch(
+      `http://localhost:3000/api/restaurant/food/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.result) {
+      alert("Item deleted successfully");
+      getFoodItems();
+    } else {
+      alert("Item not deleted");
+    }
+  } catch (error) {
+    console.error("Failed to delete food item:", error);
+  }
+};
   useEffect(() => {
     getFoodItems();
   }, []);
@@ -52,7 +78,7 @@ const FoodItemList = () => {
           <td>{index+1}</td>
           <td>
             <Image
-              src={item?.img_path || "/no-image.png"}
+              src="https://static.vecteezy.com/system/resources/thumbnails/008/687/818/small_2x/food-delivery-logo-free-vector.jpg"
               alt={item?.name || "Food"}
               width={80}
               height={80}
@@ -67,8 +93,8 @@ const FoodItemList = () => {
           <td>{item?.description}</td>
 
           <td>
-            <button className="edit-btn">Edit</button>
-            <button className="delete-btn">Delete</button>
+            <button className="edit-btn" onClick={()=>router.push('dashboard/'+item._id)}>Edit</button>
+            <button className="delete-btn" onClick={()=>handleDeleteitem(item._id)}>Delete</button>
           </td>
         </tr>
       ))}
