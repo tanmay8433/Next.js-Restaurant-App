@@ -3,7 +3,7 @@ import { useState } from "react"
 import RestaurantLogin from "../_components/RestaurantLogin"
 import RestaurantSignUp from "../_components/RestaurantSignUp"
 import RestaurantHeader from "../_components/RestaurantHeader"
-import RestaurantFooter from "../_components/RestaurantFooter"
+import Footer from "../_components/Footer"
 import  './style.css'
 
 const Restaurant = () => {
@@ -25,7 +25,7 @@ const Restaurant = () => {
         </button>
       </div>
     </div>
-<RestaurantFooter/>
+<Footer/>
 
     </>
   )
