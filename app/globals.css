@@ -268,7 +268,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 540px;
+  min-height: 40px;
 
   display: flex;
   flex-direction: column;
@@ -391,4 +391,35 @@ body {
     max-width: 500px;
     
   }
+}
+.restaurant-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.restaurant-card {
+  width: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-5px);
+}
+
+.restaurant-card h2 {
+  color: #ff6b00;
+  margin-bottom: 10px;
+}
+
+.restaurant-card p {
+  margin: 6px 0;
+  color: #555;
 }
