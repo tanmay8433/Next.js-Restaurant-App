@@ -1,12 +1,14 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect,  useState } from "react";
 import CustomerHeader from "./_components/CustomerHeader"
 import Footer from "./_components/Footer"
+import { useRouter } from "next/navigation";
 export default function Home() {
     const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [ restaurants,setRestaurants]=useState([]);
   const [searchText, setSearchText] = useState("");
+  const router=useRouter()
  const fetchCities = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/customer/locations");
@@ -103,8 +105,8 @@ console.log(restaurants,"restaurants")
       </div>
       </div>
       <div className="restaurant-container">
-  {restaurants.map((item, index) => (
-    <div key={index} className="restaurant-card">
+  {restaurants?.map((item, index) => (
+    <div key={index} className="restaurant-card" onClick={()=>router.push('explore/'+item.name+"?id="+item._id)}>
       <h2>{item.name}</h2>
       <p><strong>City:</strong> {item.city}</p>
       <p><strong>Address:</strong> {item.address}</p>
