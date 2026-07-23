@@ -10,7 +10,14 @@ const page = ({params}) => {
   const id = searchParams.get("id");
   const [restaurantdetails,setRestaurantDetails]=useState();
   const [fooditems,setFoodItems]=useState([])
-   
+   const [cartdata,setCartData]=useState()
+     const [cartstorage,setCartStorage]=useState(JSON.parse(localStorage.getItem('cart')));
+  const [cartids,setCartIds]=useState(()=>cartstorage?cartstorage?.map((item)=> 
+    {return item._id}):[])
+const [removecartData,setRemveCartData]=useState()
+
+
+    console.log("Cartids",cartids)
 useEffect(() => {
 loadrestaurantDetails()
 }, [])
@@ -35,12 +42,23 @@ if(result.success){
 }
 const addToCart = (item) => {
   console.log("Added to cart:", item);
-
+setCartData(item)
   // Later you can save it to localStorage or context
+
+  let localcartIds=cartids;
+  localcartIds.push(item._id)
+  setCartIds(localcartIds)
+  setRemveCartData()
 };
+const removetoCart=(item)=>{
+setRemveCartData(item._id)
+var localIds=cartids.filter((ids)=>ids!=item._id);
+setCartData()
+setCartIds(localIds)
+}
   return (
     <div> 
-       <CustomerHeader/>
+       <CustomerHeader cartData={cartdata} removeCartData={removecartData}/>
        <div className="details-page-banner">      
       <h1>{decodeURI(name)}</h1>
        <h3>{restaurantdetails?.city}</h3>
@@ -65,13 +83,19 @@ const addToCart = (item) => {
           <h2>{item.name}</h2>
           <p>{item.description}</p>
           <h3>₹{item.price}</h3>
-
-          <button
+{cartids?.includes(item._id)?   <button
+            className="add-cart-btn"
+            onClick={() => removetoCart(item)}
+          >
+            Remove from Cart
+          </button>: <button
             className="add-cart-btn"
             onClick={() => addToCart(item)}
           >
             Add to Cart
-          </button>
+          </button>}
+       
+         
         </div>
       </div>
     ))
